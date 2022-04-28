@@ -1,0 +1,99 @@
+{% extends 'ecom/homebase.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block css %}
+.container-div{
+width: 77% !important;
+background-color: white;
+box-shadow: -3px 2px 13px 4px rgba(0,0,0,0.24);
+-webkit-box-shadow: -3px 2px 13px 4px rgba(0,0,0,0.24);
+-moz-box-shadow: -3px 2px 13px 4px rgba(0,0,0,0.24);
+}
+li{
+list-style-type:none;
+margin: 20px 0;
+}
+.column2{
+background-color:#e3e3e3;
+}
+.productdiv{
+	background-color:white;
+	border-radius: 5px;
+	margin: 5px 0;
+}
+.column2 p{
+	margin-bottom: 0;
+	}
+.productimage{
+	height: 60px;
+	margin-right: 21px;
+}
+{% endblock %}
+
+{%block body%}
+{%if product_in_cart%}
+<div class="container-div  justify-content-center row align-item-center mx-auto my-4">
+	<div class="col-md-7 p-4">
+		<form method="post">
+			{% csrf_token %}
+			<ul class="form-style-1">
+				<li>
+					<label>Email Address<span class="required">*</span></label>
+					{% render_field addressForm.Email class="form-control" placeholder="Email address" %}
+
+				</li>
+				<li>
+					<label>Mobile No<span class="required">*</span></label>
+					{% render_field addressForm.Mobile class="form-control" placeholder="Mobile Number" %}
+				</li>
+
+				<li>
+					<label>Shipment Address <span class="required">*</span></label>
+					{% render_field addressForm.Address id="field5" class="form-control" placeholder="12 Glen Dr,Sandton, Johannesburg 2000" %}
+
+				</li>
+				<li>
+					<input type="submit" class="btn btn-primary" value="Proceed To Payment" />
+				</li>
+			</ul>
+		</form>
+		{%else%}
+		<h1 style="text-align:center; color:red;"> First Add Product In Cart </h1>
+
+		{%endif%}
+	</div>
+
+<div class="col-md-5 column2 p-4">
+	<!-- if -->
+	<div class="d-flex justify-content-between align-items-center px-3 productdiv">
+		<div class="row">
+			<img src="http://127.0.0.1:8000/static/product_image/WhatsApp_Image_2022-02-27_at_11.22.07_PM_1.jpeg" class="productimage" alt="">
+			<div>
+				<p class="productname">Lotus Orange tshirt</p>
+				<p class="productdesc">desc</p>
+			</div>
+		</div>
+
+		<p class="price">33</p>
+	</div>
+	<!-- endif -->
+	<hr>	
+	<div class="d-flex justify-content-between my-2">
+		<p>Subtotal</p>
+		<p>55.00</p>
+	</div>
+	<div class="d-flex justify-content-between my-2">
+		<p>Shipping</p>
+		<p>55.00</p>
+	</div>
+	<hr>
+	<div class="d-flex justify-content-between">
+		<p>Total</p>
+		<p>55.00</p>
+	</div>
+</div>
+</div>
+
+{% endblock body %}
